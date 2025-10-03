@@ -14,7 +14,8 @@ const SIGN_REMOVED = '-';
 const SIGN_ADDED = '+';
 const SIGN_TAB = ' ';
 
-function genDiff(string $pathToFile1, string $pathToFile2): string {
+function genDiff(string $pathToFile1, string $pathToFile2): string
+{
 
     $file1Content = Parser\getFileContent($pathToFile1);
     $file2Content = Parser\getFileContent($pathToFile2);
@@ -28,10 +29,8 @@ function genDiff(string $pathToFile1, string $pathToFile2): string {
     $keys = array_values($keys);
 
     $diffResult = [];
-    foreach($keys as $key) {
-
+    foreach ($keys as $key) {
         if (array_key_exists($key, $data1) && array_key_exists($key, $data2)) {
-
             if ($data1[$key] === $data2[$key]) {
                 $diffResult[] = [
                     'key' => $key,
@@ -46,13 +45,13 @@ function genDiff(string $pathToFile1, string $pathToFile2): string {
                     'status' => STATUS_CHANGED
                 ];
             }
-        } else if (array_key_exists($key, $data1)) {
+        } elseif (array_key_exists($key, $data1)) {
             $diffResult[] = [
                 'key' => $key,
                 'value' => $data1[$key],
                 'status' => STATUS_REMOVED
             ];
-        } else if (array_key_exists($key, $data2)) {
+        } elseif (array_key_exists($key, $data2)) {
             $diffResult[] = [
                 'key' => $key,
                 'value' => $data2[$key],
@@ -64,11 +63,11 @@ function genDiff(string $pathToFile1, string $pathToFile2): string {
     return formatResult($diffResult);
 }
 
-function formatResult (array $diffResult): string {
+function formatResult(array $diffResult): string
+{
 
     $result = "";
     foreach ($diffResult as $item) {
-
         if (is_bool($item['value'])) {
             $item['value'] = $item['value'] ? "true" : "false";
         }

@@ -1,9 +1,11 @@
 <?php
 
 namespace Differ\Parser;
+
 use Funct\Collection;
 
-function getFileContent(string $filePath): string {
+function getFileContent(string $filePath): string
+{
 
     $absolutePath = realpath($filePath);
     if ($absolutePath === false) {
@@ -16,16 +18,16 @@ function getFileContent(string $filePath): string {
     }
 
     return $fileContent;
-
 }
 
-function printFileContent(string $filePath): void {
+function printFileContent(string $filePath): void
+{
 
     $fileContent = getFileContent($filePath);
     $fileName = basename($filePath);
     $data = json_decode($fileContent);
     print_r($fileName . "\n\n");
-    foreach($data as $key => $value) {
+    foreach ($data as $key => $value) {
         if (is_bool($value)) {
             $value = $value ? "true" : "false";
         }
