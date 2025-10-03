@@ -9,7 +9,8 @@ if (file_exists($autoloadPath1)) {
     require_once $autoloadPath2;
 }
 
-use Gendiff\Parser;
+use Differ\Parser;
+use Differ\Differ;
 
 $doc = <<<DOC
 Generate diff
@@ -32,5 +33,12 @@ $args = Docopt::handle($doc, array('version'=>'Genfiff 1.0'));
 $firstFilePath = $args['<firstFile>'];
 $secondFilePath = $args['<secondFile>'];
 
-Parser\PrintfileContent($firstFilePath);
-Parser\PrintfileContent($secondFilePath);
+try {
+    //Parser\PrintfileContent($firstFilePath);
+    //Parser\PrintfileContent($secondFilePath);
+    $diff = Differ\genDiff($firstFilePath, $secondFilePath);
+    print_r($diff);
+} catch (Exception $e) {
+    print_r($e->getMessage() . PHP_EOL);
+}
+

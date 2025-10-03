@@ -1,17 +1,19 @@
 {
     "name": "hexlet/code",
-    "type": "project",
+    "type": "library",
     "authors": [
         {
             "name": "Natalia Kozlova"
         }
     ],
     "require": {
-        "docopt/docopt": "^1.0"
+        "docopt/docopt": "^1.0",
+        "funct/funct": "^1.6"
     },
     "autoload": {
         "files": [
-            "src/Parser.php"
+            "src/Parser.php",
+            "src/Differ.php"
         ]
     }
 }
