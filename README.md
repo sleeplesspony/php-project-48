@@ -1,5 +1,8 @@
 ### Hexlet tests and linter status:
+
 [![Actions Status](https://github.com/sleeplesspony/php-project-48/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/sleeplesspony/php-project-48/actions)
+
+[![ci-tests](https://github.com/sleeplesspony/php-project-48/actions/workflows/wofkflow.yml/badge.svg)](https://github.com/sleeplesspony/php-project-48/actions/workflows/wofkflow.yml)
 
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=sleeplesspony_php-project-48&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=sleeplesspony_php-project-48)
 
