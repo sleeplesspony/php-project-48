@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1759825885">
-  <project timestamp="1759825885" name="Clover Coverage">
+<coverage generated="1759827865">
+  <project timestamp="1759827865" name="Clover Coverage">
     <file name="/mnt/d/_HEXLET/php-project-48/src/Differ.php">
       <line num="20" type="stmt" count="1"/>
       <line num="21" type="stmt" count="1"/>
