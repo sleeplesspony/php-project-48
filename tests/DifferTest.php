@@ -17,9 +17,16 @@ class DifferTest extends TestCase
     {
 
         $pathToExpectedFlat = $this->getFixtureFullPath('expected_flat');
-        $firstFilePath = $this->getFixtureFullPath('file1.json');
-        $secondFilePath = $this->getFixtureFullPath('file2.json');
-        $diff = Differ\genDiff($firstFilePath, $secondFilePath);
+
+        $firstFilePathJson = $this->getFixtureFullPath('file1.json');
+        $secondFilePathJson = $this->getFixtureFullPath('file2.json');
+        $diff = Differ\genDiff($firstFilePathJson, $secondFilePathJson);
         $this->assertStringEqualsFile($pathToExpectedFlat, $diff);
+
+        $firstFilePathYaml = $this->getFixtureFullPath('file1.yaml');
+        $secondFilePathYaml = $this->getFixtureFullPath('file2.yaml');
+        $diff = Differ\genDiff($firstFilePathYaml, $secondFilePathYaml);
+        $this->assertStringEqualsFile($pathToExpectedFlat, $diff);
+
     }
 }

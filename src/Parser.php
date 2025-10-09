@@ -2,7 +2,31 @@
 
 namespace Differ\Parser;
 
-use Funct\Collection;
+use Symfony\Component\Yaml\Yaml;
+
+function parseJson(string $dataString): array
+{
+    return json_decode($dataString, true, JSON_THROW_ON_ERROR);
+}
+
+function parseYaml(string $dataString): array
+{
+    return Yaml::parse($dataString);
+}
+
+function parse(string $format, string $dataString): array
+{
+
+    $parse = "";
+    if ($format === "json") {
+        $parse =  __NAMESPACE__ . "\parseJson";
+    } else if ($format === "yaml" || $format === "yml") {
+        $parse =  __NAMESPACE__ . "\parseYaml";
+    }
+
+    return $parse($dataString);
+
+}
 
 function getFileContent(string $filePath): string
 {

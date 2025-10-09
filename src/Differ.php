@@ -4,6 +4,7 @@ namespace Differ\Differ;
 
 use Differ\Parser;
 use Funct\Collection;
+use Symfony\Component\Yaml\Yaml;
 
 const STATUS_NOT_CHANGED = 'not-changed';
 const STATUS_CHANGED = 'changed';
@@ -19,8 +20,9 @@ function genDiff(string $pathToFile1, string $pathToFile2): string
 
     $file1Content = Parser\getFileContent($pathToFile1);
     $file2Content = Parser\getFileContent($pathToFile2);
-    $data1 = json_decode($file1Content, true, JSON_THROW_ON_ERROR);
-    $data2 = json_decode($file2Content, true, JSON_THROW_ON_ERROR);
+
+    $data1 = Parser\parse(pathinfo($pathToFile1)["extension"], $file1Content);
+    $data2 = Parser\parse(pathinfo($pathToFile2)["extension"], $file2Content);
 
     $keys1 = array_keys($data1);
     $keys2 = array_keys($data2);

@@ -20,5 +20,5 @@
 
 See GenDiff in action
 
-https://asciinema.org/a/FnGWnM7hrFzOpYK9xdiBIZZ0X
+https://asciinema.org/a/kmywGljwWpocSjd6yrVrZsDgD
 
