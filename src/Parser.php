@@ -20,12 +20,11 @@ function parse(string $format, string $dataString): array
     $parse = "";
     if ($format === "json") {
         $parse =  __NAMESPACE__ . "\parseJson";
-    } else if ($format === "yaml" || $format === "yml") {
+    } elseif ($format === "yaml" || $format === "yml") {
         $parse =  __NAMESPACE__ . "\parseYaml";
     }
 
     return $parse($dataString);
-
 }
 
 function getFileContent(string $filePath): string
