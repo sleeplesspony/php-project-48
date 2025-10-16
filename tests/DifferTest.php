@@ -17,16 +17,27 @@ class DifferTest extends TestCase
     {
 
         $pathToExpectedFlat = $this->getFixtureFullPath('expected_flat');
+        $pathToExpected = $this->getFixtureFullPath('expected');
+
+         $firstFilePathJson = $this->getFixtureFullPath('file_flat1.json');
+        $secondFilePathJson = $this->getFixtureFullPath('file_flat2.json');
+        $diff = Differ\genDiff($firstFilePathJson, $secondFilePathJson);
+        $this->assertStringEqualsFile($pathToExpectedFlat, $diff);
+
+        $firstFilePathYaml = $this->getFixtureFullPath('file_flat1.yaml');
+        $secondFilePathYaml = $this->getFixtureFullPath('file_flat2.yaml');
+        $diff = Differ\genDiff($firstFilePathYaml, $secondFilePathYaml);
+        $this->assertStringEqualsFile($pathToExpectedFlat, $diff);
 
         $firstFilePathJson = $this->getFixtureFullPath('file1.json');
         $secondFilePathJson = $this->getFixtureFullPath('file2.json');
         $diff = Differ\genDiff($firstFilePathJson, $secondFilePathJson);
-        $this->assertStringEqualsFile($pathToExpectedFlat, $diff);
+        $this->assertStringEqualsFile($pathToExpected, $diff);
 
-        $firstFilePathYaml = $this->getFixtureFullPath('file1.yaml');
-        $secondFilePathYaml = $this->getFixtureFullPath('file2.yaml');
-        $diff = Differ\genDiff($firstFilePathYaml, $secondFilePathYaml);
-        $this->assertStringEqualsFile($pathToExpectedFlat, $diff);
+        $firstFilePathJson = $this->getFixtureFullPath('file1.yaml');
+        $secondFilePathJson = $this->getFixtureFullPath('file2.yaml');
+        $diff = Differ\genDiff($firstFilePathJson, $secondFilePathJson);
+        $this->assertStringEqualsFile($pathToExpected, $diff);
 
     }
 }
