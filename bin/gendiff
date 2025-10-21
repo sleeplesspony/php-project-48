@@ -32,11 +32,12 @@ $args = Docopt::handle($doc, array('version'=>'Genfiff 1.0'));
 
 $firstFilePath = $args['<firstFile>'];
 $secondFilePath = $args['<secondFile>'];
+$format = $args['--format'];
 
 try {
     //Parser\PrintfileContent($firstFilePath);
     //Parser\PrintfileContent($secondFilePath);
-    $diff = Differ\genDiff($firstFilePath, $secondFilePath);
+    $diff = Differ\genDiff($firstFilePath, $secondFilePath, $format);
     print_r($diff);
 } catch (Exception $e) {
     print_r($e->getMessage() . PHP_EOL);
