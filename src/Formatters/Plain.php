@@ -35,6 +35,9 @@ function plain(array $diffTree): string
                 case Differ\STATUS_REMOVED:
                     $result[] = "Property '{$path}' was removed";
                     break;
+
+                default:
+                    throw new \UnexpectedValueException("Unknown status: " . $item['status']);
             }
 
             $path = $pathPrev;
@@ -59,6 +62,10 @@ function toString(mixed $item): string
 
     if (is_array($item)) {
         return "[complex value]";
+    }
+
+    if (is_numeric(($item))) {
+        return $item;
     }
 
     return "'" . (string)$item . "'";

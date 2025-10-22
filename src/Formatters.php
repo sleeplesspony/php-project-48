@@ -17,5 +17,7 @@ function formatResult(array $diffTree, string $format): string
         case "json":
             return Json\json($diffTree);
         break;
+        default:
+            throw new \UnexpectedValueException("Unknown format: {$format}");
     }
 }

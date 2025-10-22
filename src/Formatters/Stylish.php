@@ -52,6 +52,9 @@ function stylish(array $diffTree): string
                     $valueStr = toString($item['value'], $depth);
                     $result[] = "{$indentSign}" . SIGN_REMOVED . "{$item['key']}: {$valueStr}";
                     break;
+
+                default:
+                    throw new \UnexpectedValueException("Unknown status: " . $item['status']);
             }
         }
 

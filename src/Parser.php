@@ -32,12 +32,12 @@ function getFileContent(string $filePath): string
 
     $absolutePath = realpath($filePath);
     if ($absolutePath === false) {
-        throw new \Exception("File not found: {$filePath}");
+        throw new \UnexpectedValueException("File not found: {$filePath}");
     }
 
     $fileContent = file_get_contents($absolutePath);
     if ($fileContent === false) {
-        throw new \Exception("Can not read file: {$filePath}");
+        throw new \UnexpectedValueException("Can not read file: {$filePath}");
     }
 
     return $fileContent;
