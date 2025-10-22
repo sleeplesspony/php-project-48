@@ -6,6 +6,9 @@
             "name": "Natalia Kozlova"
         }
     ],
+    "bin": [
+        "bin/gendiff"
+    ],
     "require": {
         "docopt/docopt": "^1.0",
         "funct/funct": "^1.6",
