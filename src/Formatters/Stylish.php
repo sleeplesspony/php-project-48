@@ -37,20 +37,20 @@ function stylish(array $diffTree): string
 
                 case Differ\STATUS_CHANGED:
                     $oldValueStr = toString($item['old-value'], $depth);
-                    $result[] = "{$indentSign}" . SIGN_REMOVED . "{$item['key']}: {$oldValueStr}";
+                    $result[] = sprintf("%s%s%s: %s", $indentSign, SIGN_REMOVED, $item['key'], $oldValueStr);
 
                     $newValueStr = toString($item['value'], $depth);
-                    $result[] = "{$indentSign}" . SIGN_ADDED . "{$item['key']}: {$newValueStr}";
+                    $result[] = sprintf("%s%s%s: %s", $indentSign, SIGN_ADDED, $item['key'], $newValueStr);
                     break;
 
                 case Differ\STATUS_ADDED:
                     $valueStr = toString($item['value'], $depth);
-                    $result[] = "{$indentSign}" . SIGN_ADDED . "{$item['key']}: {$valueStr}";
+                    $result[] = sprintf("%s%s%s: %s", $indentSign, SIGN_ADDED, $item['key'], $valueStr);
                     break;
 
                 case Differ\STATUS_REMOVED:
                     $valueStr = toString($item['value'], $depth);
-                    $result[] = "{$indentSign}" . SIGN_REMOVED . "{$item['key']}: {$valueStr}";
+                    $result[] = sprintf("%s%s%s: %s", $indentSign, SIGN_REMOVED, $item['key'], $valueStr);
                     break;
 
                 default:
@@ -59,10 +59,12 @@ function stylish(array $diffTree): string
         }
 
         if ($depth === 1) {
-            return "{\n" . implode("\n", $result) . "\n}";
+            $resultStr = implode("\n", $result);
+            return "{\n{$resultStr}\n}";
         }
 
-        return "{\n" . implode("\n", $result) . "\n" . $indentPrev . "}";
+        $resultStr = implode("\n", $result);
+        return "{\n{$resultStr}\n{$indentPrev}}";
     };
 
     return $stylishIter($diffTree, 1);
@@ -91,5 +93,6 @@ function toString(mixed $item, int $depth): string
     }
 
     $indentPrev = str_repeat(REPLACER, REPLACER_COUNT * $depth);
-    return "{\n" . implode("\n", $result) . "\n{$indentPrev}}";
+    $resultStr = implode("\n", $result);
+    return "{\n{$resultStr}\n{$indentPrev}}";
 }
