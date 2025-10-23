@@ -9,8 +9,7 @@ if (file_exists($autoloadPath1)) {
     require_once $autoloadPath2;
 }
 
-use Differ\Parser;
-use Differ\Differ;
+use function Differ\Differ\genDiff;
 
 $doc = <<<DOC
 Generate diff
@@ -32,7 +31,7 @@ $secondFilePath = $args['<secondFile>'];
 $format = $args['--format'];
 
 try {
-    $diff = Differ\genDiff($firstFilePath, $secondFilePath, $format);
+    $diff = genDiff($firstFilePath, $secondFilePath, $format);
     print_r($diff);
 } catch (Exception $e) {
     print_r($e->getMessage() . PHP_EOL);
