@@ -3,7 +3,7 @@
 namespace Differ\Phpunit\Tests;
 
 use PHPUnit\Framework\TestCase;
-use Differ\Differ;
+use function Differ\Differ\genDiff;
 
 class DifferTest extends TestCase
 {
@@ -26,24 +26,30 @@ class DifferTest extends TestCase
         $secondFilePathYaml = $this->getFixtureFullPath('file2.yaml');
 
         // Stylish
-        $diff = Differ\genDiff($firstFilePathJson, $secondFilePathJson);
+        $diff = genDiff($firstFilePathJson, $secondFilePathJson);
         $this->assertStringEqualsFile($pathToExpectedStylish, $diff);
 
-        $diff = Differ\genDiff($firstFilePathYaml, $secondFilePathYaml);
+        $diff = genDiff($firstFilePathYaml, $secondFilePathYaml);
+        $this->assertStringEqualsFile($pathToExpectedStylish, $diff);
+
+        $diff = genDiff($firstFilePathJson, $secondFilePathJson, "stylish");
+        $this->assertStringEqualsFile($pathToExpectedStylish, $diff);
+
+        $diff = genDiff($firstFilePathYaml, $secondFilePathYaml, "stylish");
         $this->assertStringEqualsFile($pathToExpectedStylish, $diff);
 
         // Plain
-        $diff = Differ\genDiff($firstFilePathJson, $secondFilePathJson, "plain");
+        $diff = genDiff($firstFilePathJson, $secondFilePathJson, "plain");
         $this->assertStringEqualsFile($pathToExpectedPlain, $diff);
 
-        $diff = Differ\genDiff($firstFilePathYaml, $secondFilePathYaml, "plain");
+        $diff = genDiff($firstFilePathYaml, $secondFilePathYaml, "plain");
         $this->assertStringEqualsFile($pathToExpectedPlain, $diff);
 
         //Json
-        $diff = Differ\genDiff($firstFilePathJson, $secondFilePathJson, "json");
+        $diff = genDiff($firstFilePathJson, $secondFilePathJson, "json");
         $this->assertStringEqualsFile($pathToExpectedJson, $diff);
 
-        $diff = Differ\genDiff($firstFilePathYaml, $secondFilePathYaml, "json");
+        $diff = genDiff($firstFilePathYaml, $secondFilePathYaml, "json");
         $this->assertStringEqualsFile($pathToExpectedJson, $diff);
     }
 }
