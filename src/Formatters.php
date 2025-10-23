@@ -2,21 +2,19 @@
 
 namespace Differ\Formatters;
 
-use Differ\Formatters\Stylish;
-use Differ\Formatters\Plain;
+use function Differ\Formatters\Stylish\stylish;
+use function Differ\Formatters\Plain\plain;
+use function Differ\Formatters\Json\json;
 
 function formatResult(array $diffTree, string $format): string
 {
     switch ($format) {
         case "stylish":
-            return Stylish\stylish($diffTree);
-        break;
+            return stylish($diffTree);
         case "plain":
-            return Plain\plain($diffTree);
-        break;
+            return plain($diffTree);
         case "json":
-            return Json\json($diffTree);
-        break;
+            return json($diffTree);
         default:
             throw new \UnexpectedValueException("Unknown format: {$format}");
     }
