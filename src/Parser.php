@@ -6,6 +6,17 @@ use Symfony\Component\Yaml\Yaml;
 
 const SUPPORTED_EXTENSIONS = [ 'json', 'yaml', 'yml'];
 
+function parse(string $format, string $dataString): array
+{
+    if ($format === "json") {
+        return parseJson($dataString);
+    } elseif ($format === "yaml" || $format === "yml") {
+        return parseYaml($dataString);
+    }
+
+    throw new \UnexpectedValueException("Unsupported file format: {$format}");
+}
+
 function parseJson(string $dataString): array
 {
     return json_decode($dataString, true, JSON_THROW_ON_ERROR);
@@ -14,19 +25,6 @@ function parseJson(string $dataString): array
 function parseYaml(string $dataString): array
 {
     return Yaml::parse($dataString);
-}
-
-function parse(string $format, string $dataString): array
-{
-
-    $parse = "";
-    if ($format === "json") {
-        $parse =  __NAMESPACE__ . "\parseJson";
-    } elseif ($format === "yaml" || $format === "yml") {
-        $parse =  __NAMESPACE__ . "\parseYaml";
-    }
-
-    return $parse($dataString);
 }
 
 function getFileData(string $pathToFile): array
@@ -55,7 +53,7 @@ function getFileContent(string $pathToFile): string
 function getFileExtension(string $pathToFile): string
 {
     $extension = pathinfo($pathToFile, PATHINFO_EXTENSION);
-    if (in_array($extension, SUPPORTED_EXTENSIONS)) {
+    if (in_array($extension, SUPPORTED_EXTENSIONS, true)) {
         return $extension;
     } else {
         throw new \UnexpectedValueException("Unsupported file extension: {$extension}");
