@@ -27,16 +27,11 @@ Options:
 DOC;
 
 $args = Docopt::handle($doc, array('version'=>'Genfiff 1.0'));
-/* foreach ($args as $k=>$v)
-    echo $k.': '.json_encode($v).PHP_EOL; */
-
 $firstFilePath = $args['<firstFile>'];
 $secondFilePath = $args['<secondFile>'];
 $format = $args['--format'];
 
 try {
-    //Parser\PrintfileContent($firstFilePath);
-    //Parser\PrintfileContent($secondFilePath);
     $diff = Differ\genDiff($firstFilePath, $secondFilePath, $format);
     print_r($diff);
 } catch (Exception $e) {

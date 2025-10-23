@@ -59,20 +59,3 @@ function getFileExtension(string $pathToFile): string
         throw new \UnexpectedValueException("Unsupported file extension: {$extension}");
     }
 }
-
-function printFileContent(string $pathToFile): void
-{
-
-    $fileContent = getFileContent($pathToFile);
-    $fileName = basename($pathToFile);
-    $data = json_decode($fileContent);
-    print_r($fileName . "\n\n");
-    foreach ($data as $key => $value) {
-        if (is_bool($value)) {
-            $value = $value ? "true" : "false";
-        }
-        print_r("{$key} : {$value}\n");
-    }
-
-    print_r("\n\n");
-}
