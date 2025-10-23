@@ -11,7 +11,7 @@ function plain(array $diffTree): string
 
         foreach ($diffTree as $item) {
             $pathPrev = $path;
-            $path = $path ? ($path . "." . $item["key"]) : $item["key"];
+            $path = ($path !== '') ? "{$path}.{$item['key']}" : $item['key'];
 
             switch ($item['status']) {
                 case Differ\STATUS_PARENT:
@@ -37,7 +37,7 @@ function plain(array $diffTree): string
                     break;
 
                 default:
-                    throw new \UnexpectedValueException("Unknown status: " . $item['status']);
+                    throw new \UnexpectedValueException("Unknown status: {$item['status']}");
             }
 
             $path = $pathPrev;
@@ -64,9 +64,9 @@ function toString(mixed $item): string
         return "[complex value]";
     }
 
-    if (is_numeric(($item))) {
-        return $item;
+    if (is_string($item)) {
+        return "'{$item}'";
     }
 
-    return "'" . (string)$item . "'";
+    return var_export($item, true);
 }
