@@ -14,13 +14,8 @@ function stylish(array $diffTree): string
     $stylishIter = function (array $diffTree, int $depth) use (&$stylishIter): string {
         $result = [];
 
-        // Отступ для текущего уровня
         $indentFull = str_repeat(REPLACER, REPLACER_COUNT * $depth);
-
-        // Отступ для строк со знаком
         $indentSign = str_repeat(REPLACER, REPLACER_COUNT * $depth - 2);
-
-        // Отступ для закрывающей скобки (на уровень выше)
         $indentPrev = str_repeat(REPLACER, REPLACER_COUNT * ($depth - 1));
 
         foreach ($diffTree as $item) {

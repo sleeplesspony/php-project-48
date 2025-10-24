@@ -26,7 +26,6 @@ class DifferTest extends TestCase
         $firstFilePathYaml = $this->getFixtureFullPath('file1.yaml');
         $secondFilePathYaml = $this->getFixtureFullPath('file2.yaml');
 
-        // Stylish
         $diff = genDiff($firstFilePathJson, $secondFilePathJson);
         $this->assertStringEqualsFile($pathToExpectedStylish, $diff);
 
@@ -39,14 +38,12 @@ class DifferTest extends TestCase
         $diff = genDiff($firstFilePathYaml, $secondFilePathYaml, "stylish");
         $this->assertStringEqualsFile($pathToExpectedStylish, $diff);
 
-        // Plain
         $diff = genDiff($firstFilePathJson, $secondFilePathJson, "plain");
         $this->assertStringEqualsFile($pathToExpectedPlain, $diff);
 
         $diff = genDiff($firstFilePathYaml, $secondFilePathYaml, "plain");
         $this->assertStringEqualsFile($pathToExpectedPlain, $diff);
 
-        //Json
         $diff = genDiff($firstFilePathJson, $secondFilePathJson, "json");
         $this->assertStringEqualsFile($pathToExpectedJson, $diff);
 

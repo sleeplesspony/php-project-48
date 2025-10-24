@@ -33,7 +33,7 @@ function getDiffTree(array $data1, array $data2): array
     $diffTree = [];
 
     foreach ($keys as $key) {
-        if (array_key_exists($key, $data1) && array_key_exists($key, $data2)) { // ключи есть в обоих массивах
+        if (array_key_exists($key, $data1) && array_key_exists($key, $data2)) {
             if ($data1[$key] === $data2[$key]) {
                 $diffTree[] = [
                     'key' => $key,
@@ -54,13 +54,13 @@ function getDiffTree(array $data1, array $data2): array
                     'status' => STATUS_CHANGED
                 ];
             }
-        } elseif (array_key_exists($key, $data1)) { // ключ только в первом массиве
+        } elseif (array_key_exists($key, $data1)) {
             $diffTree[] = [
                 'key' => $key,
                 'value' => $data1[$key],
                 'status' => STATUS_REMOVED
             ];
-        } elseif (array_key_exists($key, $data2)) { // ключ только во втором массиве
+        } elseif (array_key_exists($key, $data2)) {
             $diffTree[] = [
                 'key' => $key,
                 'value' => $data2[$key],
