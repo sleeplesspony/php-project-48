@@ -58,12 +58,12 @@ function stylish(array $diffTree): string
             }
         }
 
+        $resultStr = implode("\n", $result);
+
         if ($depth === 1) {
-            $resultStr = implode("\n", $result);
             return "{\n{$resultStr}\n}";
         }
 
-        $resultStr = implode("\n", $result);
         return "{\n{$resultStr}\n{$indentPrev}}";
     };
 
