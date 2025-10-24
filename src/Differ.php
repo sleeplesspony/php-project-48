@@ -2,8 +2,8 @@
 
 namespace Differ\Differ;
 
-use function Differ\Parser\getFileData;
 use function Differ\Formatters\formatResult;
+use function Differ\Parser\parse;
 use function Funct\Collection\union;
 use function Funct\Collection\sortBy;
 
@@ -12,6 +12,8 @@ const STATUS_CHANGED = 'changed';
 const STATUS_REMOVED = 'removed';
 const STATUS_ADDED = 'added';
 const STATUS_PARENT = 'parent';
+
+const SUPPORTED_EXTENSIONS = [ 'json', 'yaml', 'yml'];
 
 function genDiff(string $pathToFile1, string $pathToFile2, string $format = "stylish"): string
 {
@@ -68,4 +70,37 @@ function getDiffTree(array $data1, array $data2): array
     }
 
     return $diffTree;
+}
+
+function getFileData(string $pathToFile): array
+{
+    $fileContent = getFileContent($pathToFile);
+    $extension = getFileExtension($pathToFile);
+    return parse($extension, $fileContent);
+}
+
+function getFileContent(string $pathToFile): string
+{
+
+    $absolutePath = realpath($pathToFile);
+    if ($absolutePath === false) {
+        throw new \UnexpectedValueException("File not found: {$pathToFile}");
+    }
+
+    $fileContent = file_get_contents($absolutePath);
+    if ($fileContent === false) {
+        throw new \UnexpectedValueException("Can not read file: {$pathToFile}");
+    }
+
+    return $fileContent;
+}
+
+function getFileExtension(string $pathToFile): string
+{
+    $extension = pathinfo($pathToFile, PATHINFO_EXTENSION);
+    if (in_array($extension, SUPPORTED_EXTENSIONS, true)) {
+        return $extension;
+    } else {
+        throw new \UnexpectedValueException("Unsupported file extension: {$extension}");
+    }
 }

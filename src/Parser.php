@@ -4,8 +4,6 @@ namespace Differ\Parser;
 
 use Symfony\Component\Yaml\Yaml;
 
-const SUPPORTED_EXTENSIONS = [ 'json', 'yaml', 'yml'];
-
 function parse(string $format, string $dataString): array
 {
     if ($format === "json") {
@@ -25,37 +23,4 @@ function parseJson(string $dataString): array
 function parseYaml(string $dataString): array
 {
     return Yaml::parse($dataString);
-}
-
-function getFileData(string $pathToFile): array
-{
-    $fileContent = getFileContent($pathToFile);
-    $extension = getFileExtension($pathToFile);
-    return parse($extension, $fileContent);
-}
-
-function getFileContent(string $pathToFile): string
-{
-
-    $absolutePath = realpath($pathToFile);
-    if ($absolutePath === false) {
-        throw new \UnexpectedValueException("File not found: {$pathToFile}");
-    }
-
-    $fileContent = file_get_contents($absolutePath);
-    if ($fileContent === false) {
-        throw new \UnexpectedValueException("Can not read file: {$pathToFile}");
-    }
-
-    return $fileContent;
-}
-
-function getFileExtension(string $pathToFile): string
-{
-    $extension = pathinfo($pathToFile, PATHINFO_EXTENSION);
-    if (in_array($extension, SUPPORTED_EXTENSIONS, true)) {
-        return $extension;
-    } else {
-        throw new \UnexpectedValueException("Unsupported file extension: {$extension}");
-    }
 }
